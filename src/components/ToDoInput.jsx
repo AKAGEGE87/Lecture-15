@@ -1,21 +1,10 @@
 import React from "react";
 import { useState } from "react";
 import "./style.css";
+import Button from "./Button";
+import Funcshen from "./ToDoList";
 
-const ToDoInput = () => {
-  const [todo, setTodo] = useState("");
-  const [todos, setTodos] = useState([]);
-
-  const addToDo = () => {
-    if (todo.trim() === "") return;
-    setTodos(todos.concat(todo));
-    setTodo("");
-  };
-
-  const remToDo = () => {
-    setTodos(todos.slice(0, todos.length - 1));
-  };
-
+const ToDoInput = ({ add, rem, todo, setTodo, todos, setTodos }) => {
   return (
     <div
       style={{
@@ -25,23 +14,35 @@ const ToDoInput = () => {
         textAlign: "center",
         maxWidth: "400px",
         margin: "0 auto",
-        gap: "10px"
+        gap: "10px",
+        backgroundColor: "#605c5c",
+        padding: "10px",
+        borderRadius: "10px"
       }}
     >
-      <button onClick={addToDo}>Add</button>
-      <button onClick={remToDo}>Remove</button>
+      <Button
+        text={todo}
+        setTodos={setTodos}
+        todos={todos}
+        setTodo={setTodo}
+        btnName={"Add ToDo"}
+        prop={add}
+      />
+      <Button
+        text={todo}
+        setTodos={setTodos}
+        todos={todos}
+        setTodo={setTodo}
+        btnName={"Remove ToDo"}
+        prop={rem}
+      />
       <input
         type="text"
         value={todo}
         placeholder="todo"
         onChange={(e) => setTodo(e.target.value)}
       />
-      <h1>ToDoList</h1>
-      <ul>
-        {todos.map((item, index) => (
-          <li key={index}>{item}</li>
-        ))}
-      </ul>
+      {/* <Funcshen /> */}
     </div>
   );
 };
